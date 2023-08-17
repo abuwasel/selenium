@@ -21,5 +21,16 @@ react_checkbox.click()
 veu_checkbox = driver.find_element(By.CSS_SELECTOR, '#tree-node > ol > li > ol > li.rct-node.rct-node-parent.rct-node-expanded > ol > li.rct-node.rct-node-parent.rct-node-expanded > ol > li:nth-child(3) > span')
 veu_checkbox.click()
 
+checkboxes = driver.find_elements(By.XPATH, '//input[@type="checkbox"]') # This finds elements in all the page
+#checkboxes = driver.find_elements(By.XPATH, '//li[@class="rct-node rct-node-parent rct-node-expanded"]//input[@type="checkbox"]')
+# This finds elements within a class on the page
 
-time.sleep(5)
+for checkbox in checkboxes:
+    if checkbox.is_selected():
+        print("True")
+    else:
+        print("False")
+
+driver.save_screenshot('checkbox.png')
+
+time.sleep(2)
