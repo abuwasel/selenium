@@ -22,7 +22,10 @@ due_today = driver.find_element(By.CSS_SELECTOR, 'body > div > div.layout-w > di
 #Remove the $ symbol
 new_total_balance = int(total_balance.replace("$", "")) - int(due_today.replace("$", ""))
 
-print(f'Your Current Balance is in plus: {new_total_balance}')
+if new_total_balance >= 0:
+    print(f'Your Current Balance is in plus: {new_total_balance}')
+else:
+    print(f'Your Current Balance is in minus: {new_total_balance}')
 
 
 time.sleep(2)
