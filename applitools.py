@@ -19,6 +19,7 @@ log_in_button.click()
 total_balance = driver.find_element(By.CSS_SELECTOR, 'body > div > div.layout-w > div.content-w > div > div > div.element-wrapper.compact.pt-4 > div.element-box-tp > div > div > div > div.balance.hidden-mobile > div.balance-value > span:nth-child(1)').text
 due_today = driver.find_element(By.CSS_SELECTOR, 'body > div > div.layout-w > div.content-w > div > div > div.element-wrapper.compact.pt-4 > div.element-box-tp > div > div > div > div:nth-child(3) > div.balance-value.danger').text
 
+#Remove the $ symbol
 new_total_balance = int(total_balance.replace("$", "")) - int(due_today.replace("$", ""))
 
 print(f'Your Current Balance is in plus: {new_total_balance}')
