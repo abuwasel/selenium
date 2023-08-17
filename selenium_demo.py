@@ -1,6 +1,5 @@
 from selenium_functions import *
 
-
 url = 'https://demo.applitools.com/'
 selectors = {'username':'#username',
              'password':'#password',
