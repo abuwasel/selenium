@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome()  # create a webdriver window and open it
-driver.get('  https://demo.applitools.com/')  # open this url / site
+driver.get('https://demo.applitools.com/')  # open this url / site
 
 username = driver.find_element(By.CSS_SELECTOR, '#username')
 username.send_keys('ibrahim')
