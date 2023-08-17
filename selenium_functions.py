@@ -6,21 +6,29 @@ from selenium.webdriver.common.keys import Keys
 driver = webdriver.Chrome()  # create a webdriver window and open it
 driver.get('https://demo.applitools.com/')  # open this url / site
 
-username = driver.find_element(By.CSS_SELECTOR, '#username')
-username.send_keys('ibrahim')
+selectors = {'username':'#username', 'password':'#password', 'login':'#log-in'}
+def handle_element(driver, selector, value=0):
+    element = driver.find_element(By.CSS_SELECTOR, selector)
+    if value:
+        element.send_keys(value)
+    else:
+        element.click()
 
-password = driver.find_element(By.CSS_SELECTOR, '#password')
-password.send_keys('123456')
+handle_element(driver, selectors['username'], 'ibrahim')
+handle_element(driver, selectors['password'], '123456')
+handle_element(driver, selectors['login'])
 
 time.sleep(2)
-log_in_button = driver.find_element(By.CSS_SELECTOR, '#log-in')
-log_in_button.click()
+
 
 total_balance = driver.find_element(By.CSS_SELECTOR, 'body > div > div.layout-w > div.content-w > div > div > div.element-wrapper.compact.pt-4 > div.element-box-tp > div > div > div > div.balance.hidden-mobile > div.balance-value > span:nth-child(1)').text
 due_today = driver.find_element(By.CSS_SELECTOR, 'body > div > div.layout-w > div.content-w > div > div > div.element-wrapper.compact.pt-4 > div.element-box-tp > div > div > div > div:nth-child(3) > div.balance-value.danger').text
 
 #Remove the $ symbol and convert the value from str to int
 new_total_balance = int(total_balance.replace("$", "")) - int(due_today.replace("$", ""))
+
+
+
 
 # Check if the balance is plus or minus
 if new_total_balance >= 0:
