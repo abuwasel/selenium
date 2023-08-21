@@ -10,6 +10,7 @@ def url():
     return 'https://demo.applitools.com/'
 
 
+
 @pytest.fixture()
 def selectors():
     return {'username': '#username',
@@ -24,6 +25,11 @@ data = [
     ('amiraaaaaaaa', 'bghakdbvgadjlga')
 ]
 
+
+data2 = [
+    ('roni', 1234)
+]
+
 @pytest.mark.parametrize('username,password', data)
 def test_login_p(url, selectors, username, password):
     driver = init_driver(url)
@@ -33,3 +39,13 @@ def test_login_p(url, selectors, username, password):
     time.sleep(1)
     actual = driver.current_url
     assert actual != url
+
+@pytest.mark.parametrize('username,password', data2)
+def test_current_balance(url, selectors, username, password):
+    driver = init_driver(url)
+    handle_element(driver, selectors['username'], username)
+    handle_element(driver, selectors['password'], password)
+    handle_element(driver, selectors['login'])
+    time.sleep(1)
+    actual = get_items_as_number(driver, selectors['current balance'])
+    assert actual == 350
